@@ -37,11 +37,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Install Dependencies
-        run: pip install -r tourism_project/requirements.txt
-      - name: Start MLflow Server
-        run: |
-          nohup mlflow ui --host 0.0.0.0 --port 5000 &  # Run MLflow UI in the background
-          sleep 25  # Wait for a moment to let the server starts
+        run: pip install -r tourism_project/requirements.txt      
       - name: Model Building
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
