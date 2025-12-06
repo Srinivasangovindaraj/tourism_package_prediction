@@ -127,11 +127,11 @@ base_model = XGBClassifier(
 
 # 9. Create a hyper parameter grid for fine tuning
 param_grid = {
-    'classifier__n_estimators': [100, 200],
-    'classifier__learning_rate': [0.01, 0.1],
-    'classifier__max_depth': [3, 5],
+    'xgbclassifier__n_estimators': [100, 200],
+    'xgbclassifier__learning_rate': [0.01, 0.1],
+    'xgbclassifier__max_depth': [3, 5],
     # The grid explicitly tests both the default (1) and the calculated balanced weight.
-    'classifier__scale_pos_weight': [1, class_weight]
+    'xgbclassifier__scale_pos_weight': [1, class_weight]
 }
 
 # 10. Use model pipeline to preprocess the data and build the model
