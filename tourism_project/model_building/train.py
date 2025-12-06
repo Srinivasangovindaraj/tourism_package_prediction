@@ -37,7 +37,6 @@ import atexit # For cleanup
 # CONFIGURATION AND INITIALIZATION
 HF_USER_ID = "SriniGS"
 MODEL_REPO_ID = "SriniGS/tourism-package-prediction-v2"
-MLFLOW_UI_PORT = 8000
 EXPERIMENT_NAME = "tourism-package-prediction-experiment"
 MODEL_FILENAME = "xgboost_model_pipeline.joblib"
 
