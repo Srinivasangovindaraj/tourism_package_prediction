@@ -24,7 +24,7 @@ from sklearn.metrics import (
 # Evaluate performance (Need to ensure classification_report is imported)
 from sklearn.metrics import classification_report, roc_auc_score
 #Need to ensure RepositoryNotFoundError is imported from huggingface_hub
-from huggingface_hub import RepositoryNotFoundError
+from huggingface_hub.utils import RepositoryNotFoundError, HfHubHTTPError
 
 # Model Algorithm
 from xgboost import XGBClassifier
