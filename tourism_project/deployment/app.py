@@ -39,12 +39,11 @@ except Exception as e:
 
 
 # 3. Streamlit UI for tourism Prediction
-st.set_page_config(page_title="Tourism Package Prediction", layout="wide")
 st.title("Tourism Package Purchase Predictor")
-st.markdown("Enter customer details to predict the likelihood of them purchasing the offered tourism package.")
+# Batch Prediction
+st.subheader("Enter customer details to predict the likelihood of them purchasing the offered tourism package.")
 
-
-# 4. Collect user input ---
+# 4. Collect user input
 
 # 4.1. Define input fields based on the features used in the model
 # Using OrderedDict to maintain the input order
