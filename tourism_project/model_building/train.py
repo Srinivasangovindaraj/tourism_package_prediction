@@ -96,7 +96,6 @@ class_weight = y_train.value_counts()[0] / y_train.value_counts()[1]
 # because the param_grid will test its values.
 base_model = XGBClassifier(
     random_state=42,
-    use_label_encoder=False,
     eval_metric='logloss'
 )
 
@@ -116,9 +115,7 @@ model_pipeline = make_pipeline(preprocessor,base_model)
 
 # 1. Start the ML Flow run (Main Run)
 with mlflow.start_run():
-    mlflow.set_tag("model_type", "XGBoost")
-    # Log the search space parameters
-    mlflow.log_params(param_grid)
+    mlflow.set_tag("model_type", "XGBoost")    
     mlflow.log_param("cross_validation_folds", 5)
     mlflow.log_param("classification_threshold", 0.45) # Log the custom threshold
 
