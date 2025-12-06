@@ -38,37 +38,12 @@ import atexit # For cleanup
 HF_USER_ID = "SriniGS"
 MODEL_REPO_ID = "SriniGS/tourism-package-prediction-v2"
 MLFLOW_UI_PORT = 8000
-EXPERIMENT_NAME = "Tourism-Package-Prediction-Experiment"
+EXPERIMENT_NAME = "tourism-package-prediction-experiment"
 MODEL_FILENAME = "xgboost_model_pipeline.joblib"
 
 # 1. Set the ML Flow tracking URI and experiment name
-# Set your auth token here (replace with your actual token)
-ngrok.set_auth_token("36R9Cr9IhgQl5akHbwAerRQ1w3b_68oKfHVAcFLaVLNYBoish")
-
-try:
-    # Start MLflow UI on port 8000
-    mlflow_process = subprocess.Popen(["mlflow", "ui", "--port", str(MLFLOW_UI_PORT)])
-
-    # Use atexit to ensure the MLflow process is terminated when the script exits
-    def cleanup():
-        print("Cleaning up MLflow process and ngrok tunnel...")
-        mlflow_process.terminate()
-        ngrok.kill()
-    atexit.register(cleanup)
-
-    # Create public tunnel (FIX: Connect to the correct port 8000)
-    public_url = ngrok.connect(MLFLOW_UI_PORT).public_url
-    print(f"MLflow UI is available at: {public_url}")
-
-    mlflow.set_tracking_uri(public_url)
-    mlflow.set_experiment(EXPERIMENT_NAME)
-
-except Exception as e:
-    print(f"Failed to set up MLflow tracking via ngrok: {e}. Falling back to local tracking.")
-    # Fallback if external setup fails
-    mlflow.set_tracking_uri("./mlruns")
-    mlflow.set_experiment(EXPERIMENT_NAME)
-
+mlflow.set_tracking_uri("http://localhost:5000")
+mlflow.set_experiment(EXPERIMENT_NAME)
 
 # 3. Initialize the API by using the HF token.
 api = HfApi(token=os.getenv("HF_TOKEN"))
