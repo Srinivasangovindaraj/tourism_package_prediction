@@ -132,10 +132,23 @@ with mlflow.start_run():
             mlflow.log_params(results['params'][i])
             mlflow.log_metric("mean_test_roc_auc", results['mean_test_score'][i])
             mlflow.log_metric("std_test_roc_auc", results['std_test_score'][i])
+            print("-" * 50)
+            print(f"Nested Run for Trial {i} logged.")
+            print("-" * 50)
+            print(f"Parameters: {results['params'][i]}")
+            print(f"Mean Test Score: {results['mean_test_score'][i]}")
+            print(f"Standard Deviation: {results['std_test_score'][i]}")
+            print("-" * 50)
 
     # Log best parameters separately in main run
     mlflow.log_params(grid_search.best_params_)
     mlflow.log_metric("best_cv_roc_auc", grid_search.best_score_)
+    print("-" * 50)
+    print(f"Best Parameters: {grid_search.best_params_}")
+    print(f"Best CV ROC AUC: {grid_search.best_score_}")
+    print("-" * 50)
+    print("Main Run logged.")
+    print("-" * 50)
 
     # Store and evaluate the best model
     best_model = grid_search.best_estimator_
@@ -167,6 +180,33 @@ with mlflow.start_run():
         "test_f1-score": test_report['1']['f1-score'],
         "test_roc_auc": roc_auc_score(y_test, y_pred_test_proba) # Log ROC AUC directly
     })
+    #print log_mertics
+    print("-" * 50)
+    print("Metrics logged for the best model:")
+    print("-" * 50)
+    print(f"Parameters: {grid_search.best_params_}")
+    print(f"Best CV ROC AUC: {grid_search.best_score_}")
+    print("-" * 50)
+
+    print("-" * 50)
+    print("-- Train Metrics logged for the best model: --")
+    print("-" * 50)
+
+    print(f"Train Accuracy: {train_report['accuracy']}")
+    print(f"Train Precision: {train_report['1']['precision']}")
+    print(f"Train Recall: {train_report['1']['recall']}")
+    print(f"Train F1-Score: {train_report['1']['f1-score']}")
+    print(f"Train ROC AUC: {roc_auc_score(y_train, y_pred_train_proba)}")
+
+    print("-" * 50)
+    print("-- Test Metrics logged for the best model: --")
+    print("-" * 50)
+    print(f"Test Accuracy: {test_report['accuracy']}")
+    print(f"Test Precision: {test_report['1']['precision']}")
+    print(f"Test Recall: {test_report['1']['recall']}")
+    print(f"Test F1-Score: {test_report['1']['f1-score']}")
+    print(f"Test ROC AUC: {roc_auc_score(y_test, y_pred_test_proba)}")
+    print("-" * 50)
 
     # Save the model locally (using consistent filename)
     model_path = MODEL_FILENAME # Defined as "xgboost_model_pipeline.joblib"
