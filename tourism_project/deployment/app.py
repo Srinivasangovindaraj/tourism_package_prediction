@@ -15,7 +15,7 @@ MODEL_FILENAME = "xgboost_model_pipeline.joblib"
 @st.cache_resource
 def load_model_from_hub():
     """Downloads and loads the model pipeline from Hugging Face Model Hub."""
-    st.write(f"Downloading model: {MODEL_FILENAME} from {MODEL_REPO_ID}...")
+    #st.write(f"Downloading model: {MODEL_FILENAME} from {MODEL_REPO_ID}...")
 
     # Download the file from the Hugging Face Hub
     model_path = hf_hub_download(
