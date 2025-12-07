@@ -41,8 +41,8 @@ EXPERIMENT_NAME = "tourism-package-prediction-experiment"
 MODEL_FILENAME = "xgboost_model_pipeline.joblib"
 
 # 1. Set the ML Flow tracking URI and experiment name
-#mlflow.set_tracking_uri("http://localhost:5000")
-mlflow.set_tracking_uri("./mlruns")
+mlflow.set_tracking_uri("http://localhost:5000")
+#mlflow.set_tracking_uri("./mlruns")
 mlflow.set_experiment(EXPERIMENT_NAME)
 
 # 3. Initialize the API by using the HF token.
